@@ -1,4 +1,4 @@
-# Lab - tworzenie zasobów
+# Lab - Apka w wielu regionach i integracja z GitHub
 
 ## Wymagania
 
@@ -22,7 +22,7 @@ Czas trwania: 30 minut
 
 - Przejdź do [repozytorium](https://github.com/wguzik/helloworldapp)
 
-- Kliknij `Fork`
+- Kliknij `Fork` (w prawym górnym rogu)
 
 - Wybierz swoje konto
 
@@ -82,8 +82,10 @@ cd helloworldapp
 
   ```bash
   WEBAPP_URL=$(az webapp show --name $APP_NAME --resource-group $RESOURCE_GROUP --query "defaultHostName" -o tsv)
-echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
+
+  echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
   ```
+
 ### Krok 3 - Zintegruj z GitHub
 
 - Z poziomu portalu Azure przejdź do swojego Web App
@@ -100,7 +102,8 @@ echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
 - pobierz adres URL Web App
   ```bash
   WEBAPP_URL=$(az webapp show --name $APP_NAME --resource-group $RESOURCE_GROUP --query "defaultHostName" -o tsv)
-echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
+  
+  echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
   ```
 
 ### Krok 5 - Zaktualizuj kod
@@ -139,6 +142,3 @@ echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
 ```
 az group delete --name $RESOURCE_GROUP --yes --no-wait
 ```
-
-## Zadanie domowe
-Dodaj więcej do zmiennej `environment` ograniczenie dotyczące możliwych wartości, np 'dev', 'test', 'prod'.
