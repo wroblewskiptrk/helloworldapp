@@ -124,6 +124,16 @@ echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
 - wciśnij "Merge pull request"
 - wciśnij "Delete branch"
 
+### Krok 7 - Sprawdź, czy zmiany są widoczne
+
+- odwiedź swoją aplikację
+- zobacz, że zmiany są widoczne
+
+### Krok 8 - GitHub Actions
+
+- otwórz GitHub w przeglądarce, przejdź do swojego repozytorium
+- w sekcji `Actions` obejrzyj, jak działa GitHub Actions
+
 ### Krok -1 - Usuń zasoby
 
 ```
