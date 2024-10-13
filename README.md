@@ -110,6 +110,20 @@ echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
 - wypchnij zmiany do GitHuba
 - zobacz, że zmiany są widoczne na stronie
 
+### Krok 6 - Zrób pull request
+
+- przejdź do swojego repozytorium na GitHubie
+- otwórz branch o nazwie `update hello message`
+- zacommituj zmianę
+- stwórz pull request przez wciśnięcie "Compare & pull request"
+- wklej poniższy tekst do opisu
+
+> Tekst powitania odpowiada wersji językowej 
+
+- wciśnij "Create pull request"
+- wciśnij "Merge pull request"
+- wciśnij "Delete branch"
+
 ### Krok -1 - Usuń zasoby
 
 ```
