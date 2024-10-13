@@ -18,29 +18,40 @@ Czas trwania: 30 minut
 `Web App` - serwer aplikacji
 
 
-### Krok 0 - Uruchom Cloud Shell w Azure i sklonuj kod ćwiczeń
+### Krok 0 - Zrób fork repozytorium
+
+- Przejdź do [repozytorium](https://github.com/wguzik/helloworldapp)
+
+- Kliknij `Fork`
+
+- Wybierz swoje konto
+
+- Poczekaj, aż fork zostanie utworzony
+
+### Krok 1 - Sklonuj repozytorium w Cloud Shell
 
 Nawiguj w przeglądarce do [portal.azure.com](https://portal.azure.com), uruchom "Cloud Shell" i wybierz `Bash`.
 
-Oficjalna dokumentacja: [Cloud Shell Quickstart](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/cloud-shell/quickstart.md).
+> Oficjalna dokumentacja: [Cloud Shell Quickstart](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/cloud-shell/quickstart.md).
 
 ```bash
-git clone https://github.com/wguzik/helloworldapp.git
+git clone https://github.com/<TwojeRepo>/helloworldapp.git
+
+cd helloworldapp
 ```
 
 > Poniższe kroki realizuje się za pomocą Cloud Shell.
 
-### Krok 1 - stwórz zasoby
-
+### Krok 2 - stwórz zasoby
 
   ```bash
     # Skopiuj poniższy blok do Cloud Shell i zastąp zmienne odpowiednimi wartościami, potwierdź enterem
     RESOURCE_GROUP="merito-rg"
-    LOCATION="eastus"
+    LOCATION="northeurope"
     APP_NAME="mywebapp$RANDOM"
     APP_NAME_SETTING="MyPowerfulApp"
     APP_SERVICE_PLAN="myAppServicePlan"
-    SKU="B1"
+    SKU="P0v3"
     RUNTIME="NODE:20-lts"
 
     # Stwórz resource group
@@ -55,31 +66,51 @@ git clone https://github.com/wguzik/helloworldapp.git
     --is-linux
 
     # Stwórz Web App
-az webapp create \
+    az webapp create \
     --name $APP_NAME \
     --resource-group $RESOURCE_GROUP \
     --plan $APP_SERVICE_PLAN \
     --runtime $RUNTIME
 
-az webapp config appsettings set \
+    az webapp config appsettings set \
     --name $APP_NAME \
     --resource-group $RESOURCE_GROUP \
     --settings APP_NAME=$APP_NAME_SETTING
-
-az webapp up \
-    --name $APP_NAME \
-    --resource-group $RESOURCE_GROUP \
-    --runtime $RUNTIME
-
   ```
+
+- pobierz adres URL Web App
+
+  ```bash
+  WEBAPP_URL=$(az webapp show --name $APP_NAME --resource-group $RESOURCE_GROUP --query "defaultHostName" -o tsv)
+echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
+  ```
+### Krok 3 - Zintegruj z GitHub
+
+- Z poziomu portalu Azure przejdź do swojego Web App
+- W sekcji `Deployment Center` wybierz `GitHub`
+- Postępuj zgodnie z instrukcjami, aby autoryzować dostęp do GitHuba i wybrać repozytorium
+- wybierz repozytorium `helloworldapp`
+- wybierz branch `main`
+- wybierz "Basic authentication"
+- wybierz "Preview file"
+- wybierz "Save"
+
+### Krok 4 - Odwiedź swoją aplikację
 
 - pobierz adres URL Web App
   ```bash
   WEBAPP_URL=$(az webapp show --name $APP_NAME --resource-group $RESOURCE_GROUP --query "defaultHostName" -o tsv)
-echo "Your web app is deployed at: https://$WEBAPP_URL"
+echo "Twoja aplikacja działa pod adresem: https://$WEBAPP_URL"
   ```
 
-### Krok 8 - Usuń zasoby
+### Krok 5 - Zaktualizuj kod
+
+- otwórz GitHub w przeglądarce, otwórz repozytorium `helloworldapp`
+- edytuj plik `src/index.js` przez zmianę tekstu w linii 29
+- wypchnij zmiany do GitHuba
+- zobacz, że zmiany są widoczne na stronie
+
+### Krok -1 - Usuń zasoby
 
 ```
 az group delete --name $RESOURCE_GROUP --yes --no-wait
